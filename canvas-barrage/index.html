@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      #container {
+        text-align: center;
+      }
+      #content {
+        position: relative;
+        width: 1001px;
+        margin: 0 auto;
+      }
+      #canvas {
+        position: absolute;
+      }
+      input {
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>canvas弹幕</h1>
+      <div id="content">
+        <canvas id="canvas"></canvas>
+        <video src="video.mp4" width="1001" height="416" controls></video>
+      </div>
+      <input type="text" />
+      <button>添加弹幕</button>
+      <input type="color" />
+      <input type="range" max="40" min="20" />
+    </div>
+    <script>
+      let data = [
+        {
+          value: "这是一条弹幕测试",
+          time: 0,
+          speed: 2,
+          color: "red",
+          fontSize: 20
+        },
+        {
+          value: "hello",
+          time: 1
+        }
+      ];
+    </script>
+  </body>
+</html>
