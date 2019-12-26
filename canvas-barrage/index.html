@@ -27,7 +27,7 @@
       <h1>canvas弹幕</h1>
       <div id="content">
         <canvas id="canvas"></canvas>
-        <video src="video.mp4" width="1001" height="416" controls></video>
+        <video id="video" src="video.mp4" width="1001" height="416" controls></video>
       </div>
       <input type="text" />
       <button>添加弹幕</button>
@@ -48,6 +48,26 @@
           time: 1
         }
       ];
+      let $ = document.querySelector.bind(document);
+      let canvas = $("#canvas");
+      let video = $("#video");
+      class CanvasBarrage {
+        constructor(canvas, video, option = {}) {
+          if (!canvas || !video) return;
+          this.canvas = canvas;
+          this.video = video;
+          let defaultOptions = {
+            fontSize: 20,
+            color: "gold",
+            speed: 2,
+            opacity: 0.3,
+            data: []
+          };
+        }
+      }
+      let canvasBarrage = new CanvasBarrage(canvas, video, {
+        data
+      });
     </script>
   </body>
 </html>
