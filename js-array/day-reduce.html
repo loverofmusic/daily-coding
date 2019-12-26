@@ -49,6 +49,96 @@
       }
       let iMax = itemMax(arr4);
       console.log(iMax);
+
+      //购物车数据
+      let cart = [
+        {
+          name: "iphone",
+          price: 13000
+        },
+        {
+          name: "macbook",
+          price: 16000
+        },
+        {
+          name: "ipad",
+          price: 3000
+        }
+      ];
+
+      // 获取最贵商品
+      function maxPrice(goods) {
+        return goods.reduce(function(pre, cur) {
+          return pre.price > cur.price ? pre : cur;
+        });
+      }
+      console.log(maxPrice(cart));
+
+      //汇总购物车总价
+      function sum(goods) {
+        return goods.reduce(function(total, cur) {
+          return (total += cur["price"]);
+        }, 0);
+      }
+      console.log(sum(cart));
+
+      //获取价格高于10000的商品名
+      function getItemNameByPrice(goods, price) {
+        return (
+          goods
+            .reduce(function(newArr, cur) {
+              if (cur.price > price) {
+                newArr.push(cur);
+              }
+              return newArr;
+            }, [])
+            // .map(function(item) {
+            //   return item.name;
+            // });
+            .map(item => item.name)
+        );
+      }
+      console.table(getItemNameByPrice(cart, 10000));
+
+      //去除数组中重复的数据
+      let arr5 = [1, 2, 2, 5, 3, 2];
+      let newArray = arr5.reduce(function(newArr, cur) {
+        if (newArr.includes(cur) == false) newArr.push(cur);
+        return newArr;
+      }, []);
+      console.table(newArray);
+
+      //去除购物车中重复商品
+      let cart2 = [
+        {
+          name: "iphone",
+          price: 13000
+        },
+        {
+          name: "macbook",
+          price: 16000
+        },
+        {
+          name: "iphone",
+          price: 13000
+        },
+        {
+          name: "ipad",
+          price: 3000
+        }
+      ];
+      function removeSame(goods) {
+        return goods.reduce(function(newArr, cur) {
+          let find = newArr.find(function(g) {
+            return g.name == cur.name;
+          });
+          if (!find) {
+            newArr.push(cur);
+          }
+          return newArr;
+        }, []);
+      }
+      console.table(removeSame(cart2));
     </script>
   </body>
 </html>
