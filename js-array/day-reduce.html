@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>reduce-数组统计方法</title>
+  </head>
+  <body>
+    <script>
+      let arr = [1, 2, 4, 7];
+
+      arr.reduce(function(preTotalValue, curValue, index, array) {
+        console.log(preTotalValue, curValue);
+      });
+
+      arr.reduce(function(preTotalValue, curValue, index, array) {
+        console.log(preTotalValue, curValue);
+        return 99;
+      });
+
+      let arr2 = [1, 2, 3, 4, 5];
+
+      arr2.reduce(function(preTotalValue, curValue, index, array) {
+        console.warn(preTotalValue, curValue);
+        return 99;
+      }, 0);
+
+      let arr3 = [1, 2, 3, 1, 1];
+      // 统计一个元素出现的次数
+      function itemCount(array, item) {
+        return array.reduce(function(total, cur) {
+          // return cur == item ? (total += 1) : total;
+          // return (total += cur == item ? 1 : 0);
+          total += cur == item ? 1 : 0;
+          return total;
+        }, 0);
+      }
+      // 统计 1 出现的次数
+      let iCount = itemCount(arr3, 1);
+      console.log(iCount);
+
+      // 获取元素中最大值
+      let arr4 = [1, 2, 3, 5, 2];
+      function itemMax(array) {
+        return array.reduce(function(pre, cur) {
+          return pre > cur ? pre : cur;
+        }, 0);
+      }
+      let iMax = itemMax(arr4);
+      console.log(iMax);
+    </script>
+  </body>
+</html>
