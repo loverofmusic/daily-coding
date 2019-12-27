@@ -48,14 +48,49 @@
           time: 1
         }
       ];
+
       let $ = document.querySelector.bind(document);
       let canvas = $("#canvas");
       let video = $("#video");
+
+      class Barrage {
+        constructor(obj, ctx) {
+          this.value = obj.value; //弹幕内容
+          this.time = obj.time; //弹幕时间
+          this.obj = obj;
+          this.ctx = ctx;
+        }
+        init() {
+          this.opacity = this.obj.opacity || this.ctx.opacity;
+          this.color = this.obj.color || this.ctx.color;
+          this.fontSize = this.obj.fontSize || this.ctx.fontSize;
+          //求自己的宽度， 目前是用来校验当前是否还需要继续绘制
+          let span = document.createElement("span");
+          span.innerText = this.value;
+          span.style.font = this.fontSize + 'px "Microsoft YaHei"';
+          span.style.position = "absolute";
+          document.body.appendChild(span);
+          //记录弹幕有多宽
+          this.width = span.clientWidth;
+          document.body.removeChild(span);
+          //弹幕出现的位置
+          this.x = this.ctx.canvas.width;
+          this.y = this.ctx.canvas.height * Math.random;
+          if (this.y < this.fontSize) {
+            this.y = this.fontSize;
+          }
+          if (this.y > this.ctx.canvas.height - this.fontSize) {
+            this.y = this.ctx.canvas.height - this.fontSize;
+          }
+        }
+      }
+
       class CanvasBarrage {
         constructor(canvas, video, option = {}) {
           if (!canvas || !video) return;
           this.canvas = canvas;
           this.video = video;
+          // 默认选项，放一些弹幕默认配置
           let defaultOptions = {
             fontSize: 20,
             color: "gold",
@@ -63,8 +98,51 @@
             opacity: 0.3,
             data: []
           };
+          // 合并对象，将属性全部挂载到实例上
+          Object.assign(this, defaultOptions, option);
+          // 拿到画布上下文
+          this.context = this.canvas.getContext("2d");
+          this.canvas.width = this.video.width;
+          this.canvas.height = this.video.height;
+          // 默认暂停播放， 表示不渲染弹幕
+          this.isPaused = true;
+          // 存放所有弹幕
+          // console.log(this);
+          // console.log(this.data);
+          // debugger;
+          // 存放所有弹幕，Barrage是创造弹幕实例的类
+          this.barrages = this.data.map(obj => new Barrage(obj, this));
+          // console.log(this.barrages)
+          //渲染所有弹幕
+          this.render();
+        }
+        renderBarrage() {
+          //将数组中的弹幕一个一个取出来，判断时间和视频的时间是否符合，符合就执行渲染此弹幕
+          let time = this.video.currentTime;
+          this.barrages.forEach(barrage => {
+            if (time >= barrage.time) {
+              //先去初始化 初始化后再进行绘制
+              //如果没有初始化 先去初始化一下
+              if (!barrage.isInited) {
+                barrage.init();
+                barrage.isInited = true;
+              }
+            }
+          });
+        }
+
+        // 渲染弹幕方法
+        render() {
+          //第一次 先执行清空操作，执行渲染弹幕 如果没有暂停 继续渲染
+          this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+          this.renderBarrage(); //渲染弹幕
+          if (this.isPaused == false) {
+            //递归渲染
+            requestAnimationFrame(this.render.bind(this));
+          }
         }
       }
+
       let canvasBarrage = new CanvasBarrage(canvas, video, {
         data
       });
