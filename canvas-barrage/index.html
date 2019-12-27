@@ -60,10 +60,12 @@
           this.obj = obj;
           this.ctx = ctx;
         }
+
         init() {
           this.opacity = this.obj.opacity || this.ctx.opacity;
           this.color = this.obj.color || this.ctx.color;
           this.fontSize = this.obj.fontSize || this.ctx.fontSize;
+          this.speed = this.obj.speed || this.ctx.speed;
           //求自己的宽度， 目前是用来校验当前是否还需要继续绘制
           let span = document.createElement("span");
           span.innerText = this.value;
@@ -82,6 +84,13 @@
           if (this.y > this.ctx.canvas.height - this.fontSize) {
             this.y = this.ctx.canvas.height - this.fontSize;
           }
+        }
+
+        render() {
+          //渲染自己，将自己画在画布上
+          this.ctx.context.font = this.fontSize + 'px "Microsoft YaHei"';
+          this.ctx.context.fillStyle = this.color;
+          this.ctx.context.fillText(this.value, this.x, this.y);
         }
       }
 
@@ -120,12 +129,17 @@
           //将数组中的弹幕一个一个取出来，判断时间和视频的时间是否符合，符合就执行渲染此弹幕
           let time = this.video.currentTime;
           this.barrages.forEach(barrage => {
-            if (time >= barrage.time) {
+            if (!barrage.flag && time >= barrage.time) {
               //先去初始化 初始化后再进行绘制
               //如果没有初始化 先去初始化一下
               if (!barrage.isInited) {
                 barrage.init();
                 barrage.isInited = true;
+              }
+              barrage.x -= barrage.speed;
+              barrage.render();
+              if (barrage.x <= barrage.width * -1) {
+                barrage.flag = true; //做停止渲染的标记
               }
             }
           });
@@ -145,6 +159,15 @@
 
       let canvasBarrage = new CanvasBarrage(canvas, video, {
         data
+      });
+
+      video.addEventListener("play", function() {
+        canvasBarrage.isPaused = false;
+        canvasBarrage.render();
+      });
+
+      video.addEventListener("pause", function() {
+        canvasBarrage.isPaused = true;
       });
     </script>
   </body>
