@@ -29,10 +29,10 @@
         <canvas id="canvas"></canvas>
         <video id="video" src="video.mp4" width="1001" height="416" controls></video>
       </div>
-      <input type="text" />
-      <button>添加弹幕</button>
-      <input type="color" />
-      <input type="range" max="40" min="20" />
+      <input id="text" type="text" />
+      <button id="add">添加弹幕</button>
+      <input id="color" type="color" />
+      <input id="range" type="range" max="40" min="20" />
     </div>
     <script>
       let data = [
@@ -155,6 +155,25 @@
             requestAnimationFrame(this.render.bind(this));
           }
         }
+
+        //
+        add(obj) {
+          this.barrages.push(new Barrage(obj, this));
+        }
+
+        //
+        reset() {
+          this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+          let time = this.video.currentTime;
+          this.barrages.forEach(barrage => {
+            barrage.flag = false;
+            if (time <= barrage.time) {
+              barrage.isInited = false;//重新初始化
+            } else {
+              barrage.flag = true;//其他弹幕不再渲染
+            }
+          });
+        }
       }
 
       let canvasBarrage = new CanvasBarrage(canvas, video, {
@@ -169,6 +188,25 @@
       video.addEventListener("pause", function() {
         canvasBarrage.isPaused = true;
       });
+
+      $("#add").addEventListener("click", function() {
+        let value = $("#text").value;
+        let time = video.currentTime;
+        let color = $("#color").value;
+        let fontSize = $("#range").value;
+        let obj = {
+          time,
+          value,
+          color,
+          fontSize
+        };
+        canvasBarrage.add(obj);
+      });
+
+      video.addEventListener("seeked", function() {
+        alert(1);
+      });
+      canvasBarrage.reset();
     </script>
   </body>
 </html>
