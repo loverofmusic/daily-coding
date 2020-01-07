@@ -77,13 +77,14 @@
           document.body.removeChild(span);
           //弹幕出现的位置
           this.x = this.ctx.canvas.width;
-          this.y = this.ctx.canvas.height * Math.random;
+          this.y = this.ctx.canvas.height * Math.random();
           if (this.y < this.fontSize) {
             this.y = this.fontSize;
           }
           if (this.y > this.ctx.canvas.height - this.fontSize) {
             this.y = this.ctx.canvas.height - this.fontSize;
           }
+          // debugger
         }
 
         render() {
@@ -102,13 +103,14 @@
           // 默认选项，放一些弹幕默认配置
           let defaultOptions = {
             fontSize: 20,
-            color: "gold",
+            color: "white",
             speed: 2,
             opacity: 0.3,
             data: []
           };
           // 合并对象，将属性全部挂载到实例上
           Object.assign(this, defaultOptions, option);
+          console.table(this);
           // 拿到画布上下文
           this.context = this.canvas.getContext("2d");
           this.canvas.width = this.video.width;
@@ -122,6 +124,7 @@
           // 存放所有弹幕，Barrage是创造弹幕实例的类
           this.barrages = this.data.map(obj => new Barrage(obj, this));
           // console.log(this.barrages)
+          debugger;
           //渲染所有弹幕
           this.render();
         }
@@ -168,9 +171,9 @@
           this.barrages.forEach(barrage => {
             barrage.flag = false;
             if (time <= barrage.time) {
-              barrage.isInited = false;//重新初始化
+              barrage.isInited = false; //重新初始化
             } else {
-              barrage.flag = true;//其他弹幕不再渲染
+              barrage.flag = true; //其他弹幕不再渲染
             }
           });
         }
