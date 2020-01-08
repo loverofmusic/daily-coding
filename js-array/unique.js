@@ -49,3 +49,32 @@ for (var i = 0; i < ary.length; i++) {
   }
 }
 console.log(ary);
+
+/*
+ * 方案三：
+ * 比较优秀的方法（基于对象）
+ */
+let ary2 = [3, 6, 2, 9, 4, 3, 4];
+// 1.创建一个空对象
+let obj = {};
+// 2.循环数组中的每一项，把每一项向对象中存储 =》 item : item
+for (let i = 0; i < ary2.length; i++) {
+  let item = ary2[i];
+
+  // if (obj[item] === undefined){
+  //   obj[item] = item;
+  //   continue;
+  // }
+  // ary2.splice(i, 1);
+  // i--;
+
+  // 3.每一次存储之前进行判断：验证obj中是否存在这一项
+  if (obj[item] !== undefined) {
+    // 已经存在这一项
+    ary2.splice(i, 1);
+    i--;
+    continue;
+  }
+  obj[item] = item;
+}
+console.log(ary2);
