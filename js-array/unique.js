@@ -82,5 +82,29 @@ for (let i = 0; i < ary2.length; i++) {
 }
 console.log(ary2);
 
+/*
+ * unique: 实现数组去重的方法
+ * @params
+ *    ary [Array] 要去重的数组
+ * @return
+ *    [Array] 去重后的数组
+ * by xxx on 20200108
+ */
+function unique (ary){
+  let obj = {};
+  for (let i = 0; i < ary.length; i++) {
+    let item = ary[i];
+    if (obj[item] !== undefined) {
+      ary[i] = ary[ary.length - 1];
+      ary.length--;
+      i--;
+      continue;
+    }
+    obj[item] = item;
+  }
+  return ary;
+}
+
+console.log(unique([12,4,34,4,7,12]))
 
 
