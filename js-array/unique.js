@@ -71,10 +71,16 @@ for (let i = 0; i < ary2.length; i++) {
   // 3.每一次存储之前进行判断：验证obj中是否存在这一项
   if (obj[item] !== undefined) {
     // 已经存在这一项
-    ary2.splice(i, 1);
+    // ary2.splice(i, 1);
+    // 基于splice实现删除性能不好，当前项被删除后，后面每一项的索引都要向前提一位，如果后面内容过多，一定影响性能
+    ary2[i] = ary2[ary2.length - 1];
+    ary2.length--;
     i--;
     continue;
   }
   obj[item] = item;
 }
 console.log(ary2);
+
+
+
