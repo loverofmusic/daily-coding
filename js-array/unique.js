@@ -108,3 +108,7 @@ function unique (ary){
 console.log(unique([12,4,34,4,7,12]))
 
 
+//基于es6
+let array1 = [12,4,34,4,7,12];
+array1 = [...new Set(array1)];
+console.log(array1)
