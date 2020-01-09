@@ -11,13 +11,19 @@
     function loadImag(src, resolve, reject) {
       let image = new Image();
       image.src = src;
-      image.onload = resolve;
+      // image.onload = resolve;
+      image.onload = () => {
+        resolve(image);
+      };
       image.onerror = reject;
     }
     loadImag(
       "houdun.jpg",
-      () => {
-        console.log("加载成功");
+      // () => {
+      //   console.log("加载成功");
+      // },
+      image => {
+        document.body.appendChild(image);
       },
       () => {
         console.log("加载失败");
