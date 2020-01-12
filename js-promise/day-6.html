@@ -17,13 +17,18 @@
           script.onerror = reject;
           // debugger
           // document.body.appendChild(script);
-          console.log('promise end')
+          console.log("promise end");
         });
       }
-      loadScript("js/hd.js").then(script => {
-        console.log(script);
-        return loadScript("js/houdunren.js")
-      });
+      loadScript("js/hd.js")
+        .then(script => {
+          console.log(script);
+          return loadScript("js/houdunren.js");
+        })
+        .then(script => {
+          console.log(script);
+          houdunren();
+        });
     </script>
   </body>
 </html>

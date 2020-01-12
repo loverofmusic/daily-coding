@@ -1,1 +1,3 @@
-console.log('hd.js')
+function hd() {
+  console.log("hd.js");
+}
