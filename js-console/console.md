@@ -183,7 +183,6 @@ obj.f(); // 调用者obj
 ```
 
 ```js
-
 //apply执行一个函数
 var o = {name: 'abc'}
 function test (){
@@ -191,6 +190,22 @@ function test (){
 }
 test();
 test.apply(o);
+
+var o = {name: 'abc'}
+function test (a, b){
+    console.log(this.name, a, b)
+}
+test();
+test.apply(o, [1,2]);
+
+var o = {name: 'abc'}
+function test (a, b){
+    console.log(this.name, a, b)
+}
+test();
+test.call(o, 1, 2);
+
+
 
 // apply call
 function f(s){
@@ -201,11 +216,14 @@ var obj = {
     a: 2
 }
 var f2 = function () {
-    return f.apply(obj, arguments);
+    console.log(arguments)
+    <!--return f.apply(obj, arguments);-->
+    return f.call(obj, ...arguments);
 }
 var b = f2(3);
 console.log(b);
 //考察点：预解析 字面量 apply arguments 作用域
+// 2 3
+// 5
 ```
-
 
