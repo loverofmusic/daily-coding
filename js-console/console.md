@@ -183,6 +183,15 @@ obj.f(); // 调用者obj
 ```
 
 ```js
+
+//apply执行一个函数
+var o = {name: 'abc'}
+function test (){
+    console.log(this.name)
+}
+test();
+test.apply(o);
+
 // apply call
 function f(s){
     console.log(this.a, s)
