@@ -262,5 +262,39 @@ b();
     function num (){}
 })(100)
 // 考察点：自执行函数（自动执行， 无调用者）
+//预解析 函数优先级最高
+```
+
+```js
+function m(){
+    console.log(a1);//undefined
+    console.log(a2);//undefined
+    console.log(b1);//undefined
+    console.log(b2);//undefined
+    if (false){
+        function b1(){};
+        var a1 = 100;
+    }
+    if (true){
+        function b2(){};
+        var a2 = 10;
+    }
+    console.log(a1);//undefined
+    console.log(a2);//10
+    console.log(b1);//undefined
+    console.log(b2);//fn
+}
+m()
+
+function x(){
+    console.log(n)
+    console.log(b1)
+    if (false){
+        function b1(){console.log(9)};
+        var n;
+    }
+}
+x()
+// 考察点：
 ```
 
