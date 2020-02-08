@@ -241,3 +241,26 @@ b();
 //考察点：预解析var fun
 ```
 
+```js
+(function d(num){
+    console.log(num);
+    var num = 10;
+}(100));
+//or
+(function d(num){
+    console.log(num);
+    var num = 10;
+})(100);
+// 考察点：自执行函数（自动执行， 无调用者）
+// 100
+```
+
+```js
+(function e(num){
+    console.log(num);//fn
+    var num = 10;
+    function num (){}
+})(100)
+// 考察点：自执行函数（自动执行， 无调用者）
+```
+
