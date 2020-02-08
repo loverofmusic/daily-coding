@@ -227,3 +227,17 @@ console.log(b);
 // 5
 ```
 
+```js
+function b(){
+    console.log(a);//
+    var a = 10;
+    function a(){};
+    a = 100;
+    console.log(a);//
+}
+b();
+//fn
+//100
+//考察点：预解析var fun
+```
+
