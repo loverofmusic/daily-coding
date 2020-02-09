@@ -298,3 +298,19 @@ x()
 // 考察点：
 ```
 
+```js
+(function f(num){
+    console.log(num);//fn
+    function num(){};
+    var num = 10;
+    console.log(num);//10
+})(100)
+// or
+(function f(num){
+    function num(){};
+    console.log(num);//fn
+    var num = 10;
+    console.log(num);//10
+})(100)
+```
+
