@@ -312,5 +312,27 @@ x()
     var num = 10;
     console.log(num);//10
 })(100)
+// or
+(function f(num){
+    console.log(num);//fn
+    var num = 10;
+    function num(){};
+    console.log(num);//10
+})(100)
+// or
+(function f(num){
+    console.log(num);//fn
+    var num = 10;
+    console.log(num);//10
+    function num(){};
+})(100)
+// or
+(function f(num){
+    console.log(num);//fn
+    num = 10;//改变函数值 为 数字
+    console.log(num);//10
+    function num(){};
+})(100)
+// 考察点：代码解释器会优化代码顺序
 ```
 
