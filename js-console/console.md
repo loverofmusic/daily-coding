@@ -349,3 +349,17 @@ function n(){
 }
 ```
 
+```js
+var R = (function(){
+    var u = {a: 1, b: 2}
+    var r = {
+        fn: function (k){ // k=='a'
+            return u[k]; // u['a'],（函数返回一个函数）闭包，所以依然能拿到外面的u对象  
+        }
+    }
+    return r;
+})();
+console.log(R.fn('a'));// 1
+// 考察点：自执行 闭包
+```
+
