@@ -336,3 +336,16 @@ x()
 // 考察点：代码解释器会优化代码顺序
 ```
 
+```js
+function n(){
+    if(2>1){
+        arr = 10; // let没有预解析，等于直接给一个不存在的变量赋值，报错，下面就不执行了
+        brr = 10;
+        let arr;
+        var brr;
+        console.log(arr);
+        console.log(brr);
+    }
+}
+```
+
