@@ -18,13 +18,15 @@ class Compile {
     // console.log([...childNodes])
     [...childNodes].forEach(child => {
       if (this.isElementNode(child)) {
-        console.log("元素节点", child);
+        // console.log("元素节点", child);
         //元素节点
         //编译元素节点
+        this.compileElement(child);
       } else {
-        console.log("文本节点", child);
+        // console.log("文本节点", child);
         //文本节点
         //编译文本节点
+        this.compileText(child);
       }
       if (child.childNodes && child.childNodes.length) {
         this.compile(child);
@@ -45,6 +47,8 @@ class Compile {
     }
     return f;
   }
+  compileElement(node) {}
+  compileText(node) {}
 }
 
 class MVue {
