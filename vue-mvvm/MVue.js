@@ -13,7 +13,8 @@ const compileUtil = {
     this.updater.textUpdater(node, value)
   },
   html(node, expr, vm){
-
+    const value = this.getVal(expr, vm);
+    this.updater.htmlUpdater(node, value)
   },
   model(node, expr, vm){
 
@@ -25,6 +26,9 @@ const compileUtil = {
   updater: {
     textUpdater(node, value){
       node.textContent = value;
+    },
+    htmlUpdater(node,value){
+      node.innerHTML = value
     }
   }
 }

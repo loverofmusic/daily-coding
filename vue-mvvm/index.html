@@ -18,7 +18,7 @@
     <div v-text="msg"></div>
     <div v-text="person.name"></div>
     <div v-html="htmlStr"></div>
-    <input type="text" model="msg">
+    <input type="text" v-model="msg">
   </div>
   <script src="./MVue.js"></script>
   <script>
@@ -30,7 +30,8 @@
           age: "28",
           fav: "music"
         },
-        msg: "vue---mvvm"
+        msg: "msg",
+        htmlStr: "<h1>html内容绑定</h1>"
       }
     })
   </script>
