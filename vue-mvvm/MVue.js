@@ -1,37 +1,40 @@
 const compileUtil = {
-  getVal(expr, vm){
+  getVal(expr, vm) {
     // [person,name]
-    return expr.split('.').reduce((data, currentVal)=>{
+    return expr.split(".").reduce((data, currentVal) => {
       console.log(currentVal);
-      return data[currentVal]
+      return data[currentVal];
     }, vm.$data);
   },
-  text(node, expr, vm){//expr:msg 学习mvvm原理
+  text(node, expr, vm) {
+    //expr:msg 学习mvvm原理
     // const value = vm.$data[expr];
     //也有可能expr是person.name这种类型
     const value = this.getVal(expr, vm);
-    this.updater.textUpdater(node, value)
+    this.updater.textUpdater(node, value);
   },
-  html(node, expr, vm){
+  html(node, expr, vm) {
     const value = this.getVal(expr, vm);
-    this.updater.htmlUpdater(node, value)
+    this.updater.htmlUpdater(node, value);
   },
-  model(node, expr, vm){
-
+  model(node, expr, vm) {
+    const value = this.getVal(expr, vm);
+    this.updater.modelUpdater(node, value);
   },
-  on(node, expr, vm, eventName){
-
-  },
+  on(node, expr, vm, eventName) {},
   //更新的函数
   updater: {
-    textUpdater(node, value){
+    textUpdater(node, value) {
       node.textContent = value;
     },
-    htmlUpdater(node,value){
-      node.innerHTML = value
+    htmlUpdater(node, value) {
+      node.innerHTML = value;
+    },
+    modelUpdater(node, value) {
+      node.value = value;
     }
   }
-}
+};
 
 class Compile {
   constructor(el, vm) {
@@ -116,5 +119,3 @@ class MVue {
     }
   }
 }
-
-
