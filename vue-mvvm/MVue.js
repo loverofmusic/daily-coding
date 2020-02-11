@@ -1,3 +1,34 @@
+const compileUtil = {
+  getVal(expr, vm){
+    // [person,name]
+    return expr.split('.').reduce((data, currentVal)=>{
+      console.log(currentVal);
+      return data[currentVal]
+    }, vm.$data);
+  },
+  text(node, expr, vm){//expr:msg 学习mvvm原理
+    // const value = vm.$data[expr];
+    //也有可能expr是person.name这种类型
+    const value = this.getVal(expr, vm);
+    this.updater.textUpdater(node, value)
+  },
+  html(node, expr, vm){
+
+  },
+  model(node, expr, vm){
+
+  },
+  on(node, expr, vm, eventName){
+
+  },
+  //更新的函数
+  updater: {
+    textUpdater(node, value){
+      node.textContent = value;
+    }
+  }
+}
+
 class Compile {
   constructor(el, vm) {
     this.el = this.isElementNode(el) ? el : document.querySelector(el);
@@ -47,8 +78,26 @@ class Compile {
     }
     return f;
   }
-  compileElement(node) {}
+  compileElement(node) {
+    // <div v-text='msg'></div>
+    const attributes = node.attributes;
+    // console.log(attributes);
+    [...attributes].forEach(attr => {
+      // console.log(attr)
+      const { name, value } = attr;
+      // console.log(name);
+      if (this.isDirective(name)) {
+        //是一个指令 v-text v-html v-model on:click
+        const [, directive] = name.split("-");
+        const [dirName, eventName] = directive.split(":");
+        compileUtil[dirName](node, value, this.vm, eventName); //方括号为取 对象 属性
+      }
+    });
+  }
   compileText(node) {}
+  isDirective(attrName) {
+    return attrName.startsWith("v-");
+  }
 }
 
 class MVue {
@@ -63,3 +112,5 @@ class MVue {
     }
   }
 }
+
+
