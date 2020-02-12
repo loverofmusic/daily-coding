@@ -2,7 +2,7 @@ const compileUtil = {
   getVal(expr, vm) {
     // [person,name]
     return expr.split(".").reduce((data, currentVal) => {
-      console.log(currentVal);
+      // console.log(currentVal);
       return data[currentVal];
     }, vm.$data);
   },
@@ -105,7 +105,13 @@ class Compile {
       }
     });
   }
-  compileText(node) {}
+  compileText(node) {
+    //{{}}
+    const content = node.textContent;
+    if(/\{\{(.+?)\}\}/.test(content)){
+      console.log(content)
+    }
+  }
   isDirective(attrName) {
     return attrName.startsWith("v-");
   }
