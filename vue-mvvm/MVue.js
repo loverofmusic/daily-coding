@@ -97,7 +97,11 @@ class Compile {
         //是一个指令 v-text v-html v-model on:click
         const [, directive] = name.split("-");
         const [dirName, eventName] = directive.split(":");
+        //更新数据 数据驱动视图
         compileUtil[dirName](node, value, this.vm, eventName); //方括号为取 对象 属性
+
+        //删除有指令的标签上的属性
+        node.removeAttribute("v-" + directive);
       }
     });
   }
