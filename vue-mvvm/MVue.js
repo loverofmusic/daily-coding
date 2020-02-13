@@ -10,7 +10,16 @@ const compileUtil = {
     //expr:msg 学习mvvm原理
     // const value = vm.$data[expr];
     //也有可能expr是person.name这种类型
-    const value = this.getVal(expr, vm);
+    // const value = this.getVal(expr, vm);
+    // this.updater.textUpdater(node, value);
+    let value;
+    if (expr.indexOf("{{") !== -1) {
+      value = expr.replace(/\{\{(.+?)\}\}/g, (...args) => {
+        return this.getVal(args[1], vm);
+      });
+    } else {
+      value = this.getVal(expr, vm);
+    }
     this.updater.textUpdater(node, value);
   },
   html(node, expr, vm) {
@@ -21,7 +30,13 @@ const compileUtil = {
     const value = this.getVal(expr, vm);
     this.updater.modelUpdater(node, value);
   },
-  on(node, expr, vm, eventName) {},
+  on(node, expr, vm, eventName) {
+    let fn = vm.$options.methods && vm.$options.methods[expr];
+    node.addEventListener(eventName, fn.bind(vm), false);
+  },
+  bind(node, expr, vm, attrName){
+
+  },
   //更新的函数
   updater: {
     textUpdater(node, value) {
@@ -94,7 +109,7 @@ class Compile {
       const { name, value } = attr;
       // console.log(name);
       if (this.isDirective(name)) {
-        //是一个指令 v-text v-html v-model on:click
+        //是一个指令 v-text v-html v-model v-on:click v-bind:src
         const [, directive] = name.split("-");
         const [dirName, eventName] = directive.split(":");
         //更新数据 数据驱动视图
@@ -102,14 +117,22 @@ class Compile {
 
         //删除有指令的标签上的属性
         node.removeAttribute("v-" + directive);
+      } else if (this.isEventName(name)) {
+        //@click='handlerClick'
+        let [, eventName] = name.split('@');
+        compileUtil['on'](node, value, this.vm, eventName);
       }
     });
+  }
+  isEventName(attrName) {
+    return attrName.startsWith("@");
   }
   compileText(node) {
     //{{}}
     const content = node.textContent;
-    if(/\{\{(.+?)\}\}/.test(content)){
-      console.log(content)
+    if (/\{\{(.+?)\}\}/.test(content)) {
+      // console.log(content)
+      compileUtil["text"](node, content, this.vm);
     }
   }
   isDirective(attrName) {

@@ -19,6 +19,8 @@
     <div v-text="person.name"></div>
     <div v-html="htmlStr"></div>
     <input type="text" v-model="msg">
+    <button v-on:click="handlerClick">按钮on</button>
+    <button @click='handleClick'>按钮@</button>
   </div>
   <script src="./MVue.js"></script>
   <script>
@@ -32,6 +34,11 @@
         },
         msg: "msg",
         htmlStr: "<h1>html内容绑定</h1>"
+      },
+      methods: {
+        handleClick(){
+          console.log(this)
+        }
       }
     })
   </script>
