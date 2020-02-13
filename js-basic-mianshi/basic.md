@@ -81,4 +81,13 @@ console.log(person2);
   var b = a;
   b = 'aaa';
   console.log(a);
+
+  var obj = {
+    name: 'zs'
+  }
+  var obj2 = obj;
+  console.log(obj2);
+  obj2.name = 'lisi';
+  console.log(obj);
+
 ```
