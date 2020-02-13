@@ -1,7 +1,7 @@
 ```js
 // js数据类型
   // 基本数据类型 
-    // number string boolean null undefined
+    // number string boolean null undefined symbol
 
     // 什么时候返回null：
       // document.getElementById("div1")
@@ -39,13 +39,13 @@
 
 
 ```js
-//如何判断是Array还是Object
+//如何判断是数组还是对象
 var arr = [1,2,3];
 var obj = {
     name: 'vbhf'
 }
-console.log(arr.constructor == Array)//
-console.log(obj.constructor == Object)//
-console.log(arr instanceof Array)
-console.log(Array.isArray(arr))
+console.log(arr.constructor == Array)// 判断数组实例的 构造函数 是否等于Array
+console.log(obj.constructor == Object)// 判断对象实例的 构造函数 是否等于Object
+console.log(arr instanceof Array)// 判断arr是否是Array的实例
+console.log(Array.isArray(arr))//ie8以上
 ```
