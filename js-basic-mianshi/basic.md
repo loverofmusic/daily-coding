@@ -19,17 +19,21 @@
           }
           console.log(obj.age)
       // 4.函数不给return，默认返回值
-          function (){
+          function a(){
             console.log(a)
           }
-          console.log(a)
+          console.log(a())
     // typeof返回值打印
           console.log(typeof('abc')) //"string"
-          console.log()
-          console.log()
-          console.log()
-          console.log()
-          console.log()
+          console.log(typeof(123)) //"number"
+          console.log(typeof(true)) //"boolean"
+          console.log(typeof(null)) //"object" **********
+          console.log(typeof(undefined)) //"undefined"
+          console.log(typeof(a)) //"function"
+          console.log(typeof([1,2,3])) //"object" *********
+          console.log(typeof({name: 'zxcc'})) //"object"
+
+  // 引用数据类型 array object
 
 ```
 
