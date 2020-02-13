@@ -55,14 +55,14 @@ console.log(Array.isArray(arr))//ie8以上
 function Person(name, age){
   this.name = name;
   this.age = age;
-  // 这种定义方法 的方式 会在每次创建一个 新实例的时候 开辟新的内存空间，不推荐
+  // 这种定义方法 的方式 会在每次创建一个 新实例的时候 开辟新的内存空间 相当于new Function 一次，不推荐
   // this.eat = function(){
   //   console.log('...is eating')
   // }
 }
 //prototype原型对象 定义在原型对象下的所有属性和方法能被 所有的实例化对象 共享
 Person.prototype.eat = function (){
-  console.log('...is eating')
+  console.log(this.name + '...is eating');
 }
 
 var person1 = new Person('zxcc', 20);
