@@ -49,3 +49,28 @@ console.log(obj.constructor == Object)// 判断对象实例的 构造函数 是�
 console.log(arr instanceof Array)// 判断arr是否是Array的实例
 console.log(Array.isArray(arr))//ie8以上
 ```
+
+```js
+// 定义一个构造函数 当作 类（首字母一般大写）
+function Person(name, age){
+  this.name = name;
+  this.age = age;
+  // 这种定义方法 的方式 会在每次创建一个 新实例的时候 开辟新的内存空间，不推荐
+  // this.eat = function(){
+  //   console.log('...is eating')
+  // }
+}
+//prototype原型对象 定义在原型对象下的所有属性和方法能被 所有的实例化对象 共享
+Person.prototype.eat = function (){
+  console.log('...is eating')
+}
+
+var person1 = new Person('zxcc', 20);
+person1.eat();
+
+var person2 = new Person('lisi', 30);
+person2.eat();
+
+console.log(person1);
+console.log(person2);
+```
