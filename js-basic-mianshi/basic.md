@@ -74,3 +74,11 @@ person2.eat();
 console.log(person1);
 console.log(person2);
 ```
+
+```js
+  // 基本 数据类型存在 栈内存， 引用 数据类型存在 堆内存
+  var a = 'abc';
+  var b = a;
+  b = 'aaa';
+  console.log(a);
+```
