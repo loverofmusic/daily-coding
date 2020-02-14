@@ -110,7 +110,7 @@ function Cat(name, age){
   Animal.call(this, name, age);
 }
 
-//继承方法的方式：
+//继承方法的方式：原型对象 = new 父类的实例化对象
 Cat.prototype = new Animal();
 
 var cat1 = new Cat('xxx', 5);
