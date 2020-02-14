@@ -91,3 +91,32 @@ console.log(person2);
   console.log(obj);
 
 ```
+
+```js
+// 继承
+//原型继承
+
+function Animal(name, age){
+  this.name = name;
+  this.age = age;
+}
+
+Animal.prototype.eat = function(){
+  console.log(this.name+"...is eating...");
+}
+
+//继承属性的方式：在构造函数中 .call()
+function Cat(name, age){
+  Animal.call(this, name, age);
+}
+
+//继承方法的方式：
+Cat.prototype = new Animal();
+
+var cat1 = new Cat('xxx', 5);
+
+var cat2 = new Cat('yyy', 15);
+
+console.log(cat1);
+console.log(cat2);
+```
