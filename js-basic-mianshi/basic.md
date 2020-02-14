@@ -241,6 +241,7 @@ oDiv1.addEventListener('click', function(){
 
 ```js
 // 事件源
+
 <div id="div1">
   <div id="div2"></div>
 </div>
@@ -251,12 +252,15 @@ var oDiv2 = document.getElementById('div2');
 oDiv1.onclick = function(e){
   console.log(111)
   console.log(e.target);//事件源 点击谁 触发的事件 就是谁 点击div2就是<div id="div2"></div>
-  console.log(this)//谁的事件就是谁 <div id="div1">
-                                  //<div id="div2"></div>
-                                //<div>
-  console.log(e.currentTarget)//等同于this                            
 
+  console.log(this)//谁的事件就是谁
+  //<div id="div1">
+    //<div id="div2"></div>
+  //<div>
+
+  console.log(e.currentTarget)//等同于this                            
 }
+
 oDiv2.onclick = function(e){
   console.log(222)
   e.stopPropagation();//阻止冒泡
@@ -266,6 +270,41 @@ oDiv2.onclick = function(e){
   return false;//阻止默认行为
 }
 
-//上面哪个事件 如果我点击里面 div2，oDiv1中打印的 e.target 为 <div id="div2"></div>
+```
+
+```js
+// 事件委托
+
+<button id="btn">click</button>
+<ul>
+  <li>1</li>
+  <li>2</li>
+</ul>
+
+var oBtn = document.getElementById('btn');
+var aLi = document.getElementsByTagName('li');
+var oUl = document.getElementsByTagName('ul')[0];
+
+for(var i = 0; i < aLi.length; i++){
+  aLi[i].onclick = function(){
+    console.log(this.innerHTML);
+  }
+}
+
+oBtn.onclick = function(){
+  var oLi = document.createElement('li');
+  oLi.innerHTML = Math.random();
+  oUl.appendChild(oLi);
+}
+
+//事件委托 解决后生成元素的事件绑定问题
+//把事件绑定在父元素身上
+//点击子元素的时候 通过事件冒泡 会触发父元素的点击事件
+oUl.onclick = function(e){
+  if(e.target.tagName == 'LI'){
+    console.log(e.target.innerHTML)
+  }
+}
+
 
 ```
