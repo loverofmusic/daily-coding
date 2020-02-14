@@ -238,3 +238,34 @@ oDiv1.addEventListener('click', function(){
   console.log(222);
 },false);
 ```
+
+```js
+// 事件源
+<div id="div1">
+  <div id="div2"></div>
+</div>
+
+var oDiv1 = document.getElementById('div1');
+var oDiv2 = document.getElementById('div2');
+
+oDiv1.onclick = function(e){
+  console.log(111)
+  console.log(e.target);//事件源 点击谁 触发的事件 就是谁 点击div2就是<div id="div2"></div>
+  console.log(this)//谁的事件就是谁 <div id="div1">
+                                  //<div id="div2"></div>
+                                //<div>
+  console.log(e.currentTarget)//等同于this                            
+
+}
+oDiv2.onclick = function(e){
+  console.log(222)
+  e.stopPropagation();//阻止冒泡
+  e.cancelBubble = true;//ie阻止冒泡
+  e.preventDefault();//阻止默认行为
+  e.returnValue = false;//ie阻止默认行为
+  return false;//阻止默认行为
+}
+
+//上面哪个事件 如果我点击里面 div2，oDiv1中打印的 e.target 为 <div id="div2"></div>
+
+```
