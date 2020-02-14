@@ -171,3 +171,54 @@ a.apply(obj, ['1', '2']);
 
 a.bind(obj, '1', '2')();//要自己调用 
 ```
+
+```js
+// 事件模型
+    // 冒泡：(从里往外)
+    // 捕获：(从外往里)
+    // 既有冒泡又有捕获的话，就是先捕获再冒泡
+
+//false 冒泡     true 捕获(ie不支持捕获)
+
+<body id="body">
+  <div id="div1">
+    <div id="div2">
+      <div id="div3"></div>
+    </div>
+  </div>
+</body>
+
+var oDiv1 = document.getElementById('div1');
+var oDiv2 = document.getElementById('div2');
+var oDiv3 = document.getElementById('div3');
+
+oDiv1.addEventListener('click', function(){
+  console.log('div1冒泡');
+},false); //false 冒泡     true 捕获(ie不支持捕获)
+
+oDiv2.addEventListener('click', function(){
+  console.log('div2冒泡');
+},false);
+
+oDiv3.addEventListener('click', function(){
+  console.log('div3冒泡');
+},false);
+// div3冒泡
+// div2冒泡
+// div1冒泡
+
+oDiv1.addEventListener('click', function(){
+  console.log('div1捕获');
+},true); //false 冒泡     true 捕获(ie不支持捕获)
+
+oDiv2.addEventListener('click', function(){
+  console.log('div2捕获');
+},true);
+
+oDiv3.addEventListener('click', function(){
+  console.log('div3捕获');
+},true);
+// div1捕获
+// div2捕获
+// div3捕获
+```
