@@ -113,10 +113,59 @@ function Cat(name, age){
 //继承方法的方式：原型对象 = new 父类的实例化对象
 Cat.prototype = new Animal();
 
+console.log(Cat.prototype.constructor) //猫的原型指向动物去了
+Cat.prototype.constructor = Cat.constructor;
+console.log(Cat.prototype.constructor)
+
 var cat1 = new Cat('xxx', 5);
 
 var cat2 = new Cat('yyy', 15);
 
 console.log(cat1);
 console.log(cat2);
+```
+
+
+```js
+// 普通函数this指向问题 : 谁调用指向谁
+
+// 1.this在函数中 函数直接执行 => window
+function a(){
+  console.log(this)
+}
+a()
+
+// 2.定时器中 => window
+setInterval(function(){
+  console.log(this)
+}, 100)
+
+// 3.对象方法中 => obj
+obj = {
+  name: 'zs',
+  say: function(){
+    console.log(this)
+  }
+}
+obj.say();
+
+// 4.事件中 => 执行点击的元素
+
+// 5.类中 => 实例化对象
+
+```
+
+```js
+// 改变this指向
+
+function a(a, b){
+  console.log(this, a, b)
+}
+obj = {
+  name: 'zs'
+}
+
+// call() apply() bind()
+a.call(obj, '1', '2'); 
+a.apply(obj, ['1', '2']); 
 ```
