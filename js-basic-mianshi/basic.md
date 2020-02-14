@@ -168,4 +168,6 @@ obj = {
 // call() apply() bind()
 a.call(obj, '1', '2'); 
 a.apply(obj, ['1', '2']); 
+
+a.bind(obj, '1', '2')();//要自己调用 
 ```
