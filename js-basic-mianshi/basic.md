@@ -221,4 +221,20 @@ oDiv3.addEventListener('click', function(){
 // div1捕获
 // div2捕获
 // div3捕获
+
+//给元素绑定多个事件
+//onclick只能绑定一个，后面的会冲掉前面的
+oDiv1.onclick = function(){
+  console.log(111)
+}
+oDiv1.onclick = function(){
+  console.log(222)
+}
+//用事件监听 绑定多个事件
+oDiv1.addEventListener('click', function(){
+  console.log(111);
+},false);
+oDiv1.addEventListener('click', function(){
+  console.log(222);
+},false);
 ```
