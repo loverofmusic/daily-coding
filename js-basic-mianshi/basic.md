@@ -307,4 +307,14 @@ oUl.onclick = function(e){
 }
 
 
+//jquery中的.on()支持事件委托
+$('li').on('click',fucntion(){
+  console.log($(this).html())
+})
+
+$('ul').on('click','li',fucntion(){
+  console.log($(this).html())
+})
+
+
 ```
