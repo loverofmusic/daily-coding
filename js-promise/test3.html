@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div{
+        width: 100px;
+        height: 100px;
+        background: green;
+        position: absolute;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <script>
+      function interval(callback, delay){
+        let id = setInterval(function(){
+          callback(id)
+        }, delay);
+      };
+      interval(function(timeId){
+        const div = document.querySelector('div');
+        console.log(window.getComputedStyle(div).left)// 带单位 px
+        // console.log(parseInt(window.getComputedStyle(div).left))
+        let left = parseInt(window.getComputedStyle(div).left);
+        // let left = window.getComputedStyle(div).left; 
+        div.style.left = left + 10 + 'px';
+        // console.log(parseInt(div.style.left))
+        console.log(div.style.left)
+        // if(parseInt(div.style.left) > 200){
+        if(left > 200){
+          clearInterval(timeId);
+          interval((timeId2)=>{
+            let width = parseInt(window.getComputedStyle(div).width);
+            div.style.width = width - 10 + 'px';
+            if(width < 30){
+              clearInterval(timeId2)
+            }
+
+          },300)
+        }
+
+      },100);
+    </script>
+  </body>
+</html>
