@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function loadImg(src, resolve, reject){
+        var image = new Image;
+        image.src = src;
+        // image.onload = resolve;
+        image.onload = ()=>{
+          resolve(image)
+        };
+        image.error = reject;
+      };
+
+      loadImg(
+        "houdun.jpg",
+        (image) => {
+          // console.log("img load success...");
+          document.body.appendChild(image)
+        },
+        () => {
+          console.log("img load fail...");
+        }
+      );
+
+      console.log("tongbu")
+    </script>
+  </body>
+</html>
