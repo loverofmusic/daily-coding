@@ -8,7 +8,12 @@
   <body>
     <script>
       setTimeout(() => {
+        
         console.log("定时器");
+
+        setTimeout(() => {
+          console.log("settimeout settimeout");
+        }, 0);
 
         new Promise(resolve => {
           console.log("settimeout Promise"); //这里是同步执行的
