@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #id {
+        background: green;
+        height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="hd"></div>
+    <script>
+      let i = 0;
+      function handle() {
+        (function run() {
+          hd.innerHTML = i;
+          hd.style.width = i + "%";
+          // ++i;
+          // if (i <= 100) {
+          if (++i <= 100) {
+            // setTimeout(() => {
+            //   run();
+            // }, 20);
+            setTimeout(run, 20);
+          }
+        })();
+      }
+      handle();
+    </script>
+  </body>
+</html>
