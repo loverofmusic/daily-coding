@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function hd() {
+
+        for (let i = 0; i < num; i++) {
+          count += num--;
+        }
+        console.log(count)
+        //上面的for任务太久了，导致下面的同步代码迟迟没办法执行
+        // 所以想到拆分 一次次轮询执行
+
+
+      }
+      let num = 987654321;
+      let count = 0;
+      hd();
+      console.log("houdunren");
+    </script>
+  </body>
+</html>
