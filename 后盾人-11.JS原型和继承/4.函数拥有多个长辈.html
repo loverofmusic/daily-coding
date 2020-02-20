@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //function User() {}
+      //console.log(User); // 有两个长辈，prototype , __proto__(函数本身也是对象 所以有这个)
+
+      function Hd() {}
+
+      //当对象使用的情况下
+      Hd.__proto__.view = function() {
+        console.log("hd obj view function");
+      };
+      Hd.view();
+
+      //当构造函数使用的情况下
+      Hd.prototype.show = function() {
+        console.log("instance show function");
+      };
+
+      let obj = new Hd();
+      obj.show();
+
+      console.log(Hd.prototype);
+      console.log(obj.__proto__);
+      console.log(Hd.prototype === obj.__proto__);
+    </script>
+  </body>
+</html>

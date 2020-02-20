@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let hd = new Object();
+    hd.name = "xiangjun";
+    console.log(hd)
+    console.dir(Object)//prototype __proto__ 都有
+
+    Object.prototype.show = function(){
+      console.log('tag')
+    }
+
+    hd.show()
+  </script>
+</body>
+</html>
