@@ -7,16 +7,30 @@
   </head>
   <body>
     <script>
-      function hd() {
+      //做一个任务 ，给定一个num值，我们循环累加这个num--，直到num等于0
 
-        for (let i = 0; i < num; i++) {
+      // function hd() {
+
+      //   for (let i = 0; i < num; i++) {
+      //     count += num--;
+      //   }
+      //   console.log(count)
+      //   //上面的for任务太久了，导致下面的同步代码迟迟没办法执行
+      //   // 所以想到拆分 一次次轮询执行
+
+      // }
+      function hd() {
+        // 设置一个比num小的值作为分块的大小 每次就执行这一块，直到num<0
+        for (let i = 0; i < 100000000; i++) {
+          if (num <= 0) break;
           count += num--;
         }
-        console.log(count)
-        //上面的for任务太久了，导致下面的同步代码迟迟没办法执行
-        // 所以想到拆分 一次次轮询执行
-
-
+        if (num > 0) {
+          setTimeout(hd, 0);
+          console.log(count);
+        } else {
+          console.log(count);
+        }
       }
       let num = 987654321;
       let count = 0;
