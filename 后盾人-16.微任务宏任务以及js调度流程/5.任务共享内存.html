@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    let i = 0;
+
+    setTimeout(()=>{
+      console.log(++i)//拿到主线程去执行，改变i
+    }, 1000)
+
+    setTimeout(()=>{
+      console.log(++i)//拿到主线程去执行，改变的还是同一个内存中的i
+    }, 1000)
+
+    //两个任务依次执行，共享主线程内存
+
+  </script>
+</body>
+</html>
