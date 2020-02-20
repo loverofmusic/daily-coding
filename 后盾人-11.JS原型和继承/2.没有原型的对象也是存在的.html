@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let xj = {
+      name: "hhhh"
+    };
+
+    let obj = Object.create(null, {
+      name: {
+        value: "test"
+      }
+    })
+
+    console.log(xj)
+    console.log(xj.hasOwnProperty("name"))//hasOwnProperty方法继承自Object
+
+    console.log(obj)
+    console.log(obj.hasOwnProperty("name"))
+
+  </script>
+</body>
+</html>
