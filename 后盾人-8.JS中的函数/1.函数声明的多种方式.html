@@ -1,19 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  
-  <script>
-    //let str = new String("hdcms.com");
-    //console.log(str);
-    //let str = "houdunren.com"
-    // console.log(str.substr(0, 1));
-    let func = new Function("title", "console.log(title)");
-    func("houdunren");
-  </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //let str = new String("hdcms.com");
+      //console.log(str);
+      //let str = "houdunren.com"
+      // console.log(str.substr(0, 1));
+
+      //构造函数
+      let func = new Function("title", "console.log(title)");
+      func("houdunren");
+
+      //funtion声明 标准写法
+      function hd(title) {
+        console.log(title);
+      } //结尾不加 封号
+      hd("houdunren");
+      hd("houdunren");
+      hd("houdunren"); //函数的意义就在于将重复的操作相同的功能封装起来，多次调用
+
+      //表达式赋值
+      let cms = function(title) {
+        console.log(title);
+      }; //结尾最好加上封号，如果不加然后使用打包工具合并压缩之后会报错
+
+      // 对象方法 --- 一个业务，一个函数干不了，我需要很多个函数，就需要将多个函数放进对象容器中
+      let user = {
+        setUsername: function(name){
+          this.name = name
+        },
+        //对象增强写法 可以把: function去掉
+        getUsername() {
+          return this.name;
+        }
+      };
+      user.setUsername("houdunren");
+      console.log(user.getUsername());
+    </script>
+  </body>
 </html>
