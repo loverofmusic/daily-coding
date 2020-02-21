@@ -20,6 +20,17 @@
       console.log("screenX");
     }
     console.log(window.screenX);//window上的同名默认属性 被冲掉了
+
+    var cms = function(){
+      console.log('tag', '')
+    };
+    window.cms();//ok
+
+    let cms2 = function(){
+      console.log('tag', '')
+    };
+    window.cms2();//报错
+    cms2();
   </script>
 </body>
 </html>
