@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // let hd = {
+    //   data: [1,2,3,4,5]
+    // };
+    // Object.setPrototypeOf(hd, {
+    //   max(){
+    //     return this.data.sort((a,b)=>b-a)[0]
+    //   }
+    // });
+    // console.log(hd.max())
+
+
+
+    // let hd = {
+    //   data: [1,2,3,4,5]
+    // };
+    // Object.setPrototypeOf(hd, {
+    //   max(){
+    //     return this.data.sort((a,b)=>b-a)[0]
+    //   }
+    // });
+
+    // let xj = {
+    //   lessons: {js: 87, php: 88, java: 90},
+    //   //getters
+    //   get data(){
+    //     return Object.values(this.lessons)//[87,88,90]
+    //   }
+    // };
+    // console.log(hd.max.apply(xj));
+
+    let hd = {
+      data: [1,2,3,4,5]
+    };
+    Object.setPrototypeOf(hd, {
+      max(data){
+        console.log(data)//87
+        return data.sort((a,b)=>b-a)[0]
+      }
+    });
+
+    // console.log(hd.max(hd.data))
+
+    let xj = {
+      lessons: {js: 87, php: 88, java: 90},
+      //getters
+      // get data(){
+      //   return Object.values(this.lessons)//[87,88,90]
+      // }
+    };
+
+    // console.log(hd.max.apply(null, Object.values(xj.lessons)));
+    //会报错，
+    // 因为是apply调用，所以会将参数,也就是[87,88,90]这个数组里面的值一个一个拿出来赋值给函数参数，
+    // 又因为函数max只有一个参数data，所以将87付给了data，但是data需要一个数组
+
+    console.log(hd.max.call(null, Object.values(xj.lessons)));
+    // call这里的第二个参数虽然是一个数组，但是 也是可以的，
+    // 只不过会被当成一个整体，直接传给data，因为是直接一个一个传给函数的
+  </script>
+</body>
+</html>
