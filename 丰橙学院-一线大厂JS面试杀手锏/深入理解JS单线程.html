@@ -23,6 +23,11 @@
       //在浏览器 NodeJS 中 JS的运行机制是不一样的
 
       //Event Loop 即事件循环：是浏览器或Node 用来处理JavaScript单线程运行时不会阻塞的 一种机制
+      //也就是一种异步解决方案，异步原理
+
+      //都知道Node是基于Chrome V8引擎的，但是Chrome和Node的异步解决方式还是不一样的，
+      // 因为单线程事件循环这一块 Node 不是由V8处理的，是由libuv实现的；
+      // Chrome（Chrome本身是多线程）是由 I/O Thead 实现的
     </script>
   </body>
 </html>
