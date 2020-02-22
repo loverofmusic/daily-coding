@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      console.log("main thead start");
+      setTimeout(() => {
+        console.log(1);
+        Promise.resolve(3).then(data => {
+          console.log(data);
+        });
+      });
+      setTimeout(() => {
+        console.log(2);
+      });
+      console.log("main thead end");
+
+      //不同环境中 JS运行结果确实是不一致的
+    </script>
+  </body>
+</html>
