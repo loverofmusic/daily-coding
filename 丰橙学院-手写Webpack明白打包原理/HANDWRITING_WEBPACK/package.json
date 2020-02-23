@@ -1,5 +1,5 @@
 {
-  "name": "HANDWRITING_WEBPACK",
+  "name": "handwriting_webpack",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,5 +8,11 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/parser": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/traverse": "^7.8.4"
+  }
 }
