@@ -24,10 +24,36 @@
 
       //Event Loop 即事件循环：是浏览器或Node 用来处理JavaScript单线程运行时不会阻塞的 一种机制
       //也就是一种异步解决方案，异步原理
+      //一个事件循环 就是一个 JS代码执行的一个最小单位
 
       //都知道Node是基于Chrome V8引擎的，但是Chrome和Node的异步解决方式还是不一样的，
       // 因为单线程事件循环这一块 Node 不是由V8处理的，是由libuv实现的；
       // Chrome（Chrome本身是多线程）是由 I/O Thead 实现的
+
+      //Node端的Event Loop：分为6个阶段，每个阶段都有一个异步任务队列
+      //浏览器架构图 Node.js架构图
+
+      //Event Loop 事件循环机制里面是分类的，分为宏任务 微任务
+      //宏任务：
+      // setTimeout
+      // setInterval
+      // setImmediate（Node独有）
+      // requestAnimation（浏览器）
+      // IO 
+      // UI rendering 
+
+      //微任务：
+      // process.nextTick(Node) 
+      // Promise 
+      // Object.observe 
+      // MutationObserver
+
+
+
+      //微任务 会追加在当前一次事件循环的 结尾
+
+      //在node˙中只有一个宏任务的时候 和浏览器的执行是一样的，没有区别
+
     </script>
   </body>
 </html>
