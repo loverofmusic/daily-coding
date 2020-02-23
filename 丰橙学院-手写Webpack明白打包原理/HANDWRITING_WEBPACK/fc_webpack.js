@@ -1,23 +1,25 @@
 const fs = require("fs");
+const path = require("path");
 const parser = require("@babel/parser");
 const traverse = require("@babel/traverse").default;
 const babel = require("@babel/core");
 
 let ID = 0;
 
+// 单个文件处理后的结果
 function createAsset(filePath) {
-
+  
   //读取    入口文件内容
   const content = fs.readFileSync(filePath, "utf-8"); //sync 同步
-  console.log("------------------------------------entry file content");
-  console.log(content);
+  // console.log("------------------------------------entry file content");
+  // console.log(content);
 
   //通过 @babel/parser 解析出 入口文件内容的    AST
   const AST = parser.parse(content, {
     sourceType: "module"
   }); //parse 默认不支持模块化代码，所以要给定 sourceType
-  console.log("------------------------------------AST");
-  console.log(AST); //将AST 比喻成划分好各个部位的猪
+  // console.log("------------------------------------AST");
+  // console.log(AST); //将AST 比喻成划分好各个部位的猪
 
   const dependencies = [];
   // 处理多个依赖
@@ -25,13 +27,13 @@ function createAsset(filePath) {
   //通过 @babel/traverse 操作AST，去分析出    依赖文件
   traverse(AST, {
     ImportDeclaration: ({ node }) => {
-      console.log("--------------------------------ImportDeclaration first params");
-      console.log(node.source.value);
+      // console.log("--------------------------------ImportDeclaration first params");
+      // console.log(node.source.value);
       dependencies.push(node.source.value);
     }
   });
-  console.log("------------------------------------dependencies");
-  console.log(dependencies);
+  // console.log("------------------------------------dependencies");
+  // console.log(dependencies);
   // 将traverse 比喻成杀猪刀
   // 第二个参数 对象 术语叫visitor，里面传什么：
   // 对我们需要处理的节点（五花肉那一部分） 添加类型同名的一个回调函数，
@@ -47,13 +49,31 @@ function createAsset(filePath) {
     //plugins:[]//单点
   });
   //第三个参数就像我们在babel文件里面配置的一样，用到哪些插件
-  console.log("------------------------------------浏览器可识别的语法");
-  console.log(code);
+  // console.log("------------------------------------浏览器可识别的语法");
+  // console.log(code);
 
   let id = ID++;
-  return {id, filePath, code, dependencies}
+  return { id, filePath, code, dependencies };
 }
 
-const asset = createAsset("./src/index.js");
-console.log("--------------------------------------最终对外暴露出的接口");
-console.log(asset)
+// graph 文件依赖图
+function createGraph(entry) {
+  const mainAsset = createAsset(entry);
+  const queue = [mainAsset];
+
+  for (const asset of queue) {
+    const dirname = path.dirname(asset.filePath);
+
+    asset.dependencies.forEach(relativePath => {
+      const absolutePath = path.join(dirname, relativePath);
+      const childAsset = createAsset(absolutePath);
+      queue.push(childAsset);
+    });
+  }
+  return queue;
+}
+
+const graph = createGraph("./src/index.js");
+
+console.log("---------------------------------------graph");
+console.log(graph);
