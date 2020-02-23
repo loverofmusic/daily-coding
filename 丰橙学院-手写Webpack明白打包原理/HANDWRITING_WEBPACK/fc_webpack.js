@@ -8,7 +8,7 @@ let ID = 0;
 
 // 单个文件处理后的结果
 function createAsset(filePath) {
-  
+
   //读取    入口文件内容
   const content = fs.readFileSync(filePath, "utf-8"); //sync 同步
   // console.log("------------------------------------entry file content");
@@ -64,9 +64,12 @@ function createGraph(entry) {
   for (const asset of queue) {
     const dirname = path.dirname(asset.filePath);
 
+    asset.mapping = {}
     asset.dependencies.forEach(relativePath => {
+      
       const absolutePath = path.join(dirname, relativePath);
       const childAsset = createAsset(absolutePath);
+      asset.mapping[relativePath] = childAsset.id;
       queue.push(childAsset);
     });
   }
@@ -75,5 +78,46 @@ function createGraph(entry) {
 
 const graph = createGraph("./src/index.js");
 
-console.log("---------------------------------------graph");
-console.log(graph);
+function bundle(graph){
+  let modules = '';
+
+  graph.forEach(mod => {
+    modules += `
+      ${mod.id}: [
+        function (require, module, exports){
+            ${mod.code}
+        },
+        ${JSON.stringify(mod.mapping)}
+      ],
+    `
+  })
+  const result = `
+    (function(modules){
+      function require(id) {
+        const [fn, mapping] = modules[id];
+
+        function localRequire(relativePath){
+          return require(mapping[relativePath]);
+        }
+
+        const module = {
+          exports: {}
+        }
+
+        fn(localRequire, module, module.exports);
+
+        return module.exports
+      }
+
+      require(0);
+
+    })({${modules}})
+  `
+  return result
+
+}
+
+const result = bundle(graph);
+
+console.log("---------------------------------------result");
+console.log(result);
