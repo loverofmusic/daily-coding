@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // class User {} //typeof ===function
+    // let Hd = class {} //
+    // consol.log(User===User.prototype.constructor)
+
+    class User {
+      site = "后盾人";
+      constructor(name){
+        this.name = name;
+      }
+      changeSite(value){
+        this.site = value;
+      }
+      show(){
+        return `${this.site}:${this.name}`
+      }
+    }
+
+    let hd = new User("moumoumou");
+    hd.changeSite("sitehddddd");
+    console.log(hd.show());
+
+
+    let xj = new User("xc");
+    xj.changeSite("sitexccccc");
+    console.log(xj.show());
+
+    
+  </script>
+</body>
+</html>

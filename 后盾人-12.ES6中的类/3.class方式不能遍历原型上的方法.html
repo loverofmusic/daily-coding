@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class User {
+        constructor(name) {
+          this.name = name;
+        }
+        show(){}
+      }
+      let u = new User("xxx");
+      for (const key in u) {
+        console.log(key)
+      }
+      console.log(Object.getOwnPropertyDescriptor(User.prototype, "show"));
+      console.dir(JSON.stringify(Object.getOwnPropertyDescriptor(User.prototype, "show")), null, 2);
+    </script>
+  </body>
+</html>

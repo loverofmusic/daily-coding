@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    class Request {
+      static host = "https://www.houdunren.com";//给所有实例对象使用，减少内存占用
+      api(url){
+        return Request.host + `/${url}`
+      }
+    }
+
+    let r = new Request();
+    console.log(r.api("article"));
+
+    
+
+  </script>
+</body>
+</html>
