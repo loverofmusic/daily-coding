@@ -92,3 +92,10 @@ function inifiniteLoop(): never {
 declare function create(o: object | null): void;
 create({ prop: 0 });
 //create(null);
+
+//++++++++++++++++++++++++++++++++++++++++++++++类型断言
+let someValue: any = "xxxxxxxxxxxxxx";
+let strLength:number = (<string>someValue).length;//1.
+let strLength1:number = (someValue as string).length;//2. 支持JSX
+
+//
