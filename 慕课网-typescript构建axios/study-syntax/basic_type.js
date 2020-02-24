@@ -48,3 +48,4 @@ var c2 = Color2.Green;
 // 也可以通过 值  反查  名字
 var colorName = Color2[7];
 console.log(colorName);
+//any类型（用户输入，第三方代码库的动态内容 我们不确定是什么类型，并且 希望 不去做类型检查）
