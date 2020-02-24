@@ -76,3 +76,19 @@ function userWarn(): void {
 
 //**********************************************never类型
 // 是任何类型的子类型，可以赋值给任意类型
+function error(message: string): never {
+  throw new Error(message);
+}
+
+function fail() {
+  return error("something error...");
+}
+
+function inifiniteLoop(): never {
+  while (true) {}
+}
+
+//**********************************************object类型
+declare function create(o: object | null): void;
+create({ prop: 0 });
+//create(null);
