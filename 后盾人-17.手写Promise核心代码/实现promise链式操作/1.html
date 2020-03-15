@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="./Hd.js"></script>
+    <script>
+      let h = new Hd((resolve, reject) => {
+        resolve("resolved");
+        // reject("rejected")
+      })
+        .then(
+          value => {
+            // console.log(eee);
+            throw new Error("fail")
+            return '张聪'
+          },
+          reason => {
+            console.log(reason);
+            return 'p2'
+          }
+        )
+        .then(
+          value => {
+            console.log('success:'+value);
+          },
+          reason => {
+            console.log('error'+reason);
+          }
+        );
+    </script>
+  </body>
+</html>
