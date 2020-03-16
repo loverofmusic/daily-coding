@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    article{
+      margin: 20px;
+      border: 5px solid silver;
+      display: flex;
+      /* flex-direction: row; 
+      /* width: 240px;不够的话，默认 元素宽度会 压缩变小 排列 */
+      width: 240px;
+      /* flex-wrap: wrap;会换行 */
+
+      height: 200px;
+      flex-direction: column; 
+      /*主轴是根据元素排列方向来定的！！！！！！！！！！！！！！！！！！！！！，
+      flex-direction: row 水平排列 主轴就是水平的；
+      flex-direction: column 垂直排列 主轴就是垂直的*/
+      flex-wrap: wrap;
+      /* flex-flow: column wrap;  flex-direction flex-wrap可以合起来写 */
+    }
+    article *{
+      width: 100px;
+      height: 100px;
+      font-size: 35px;
+      color: white;
+      background: blueviolet;
+      padding: 10px;
+      background-clip: content-box;
+      box-sizing: border-box;
+
+    }
+  </style>
+</head>
+<body>
+  <article>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+  </article>
+
+</body>
+</html>
